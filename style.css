@@ -1,0 +1,50 @@
+body {
+  font-family: system-ui, sans-serif;
+  background: #ffffff;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  width: 90%;
+  max-width: 500px;
+  background: #ffffff;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+#jsonView {
+  background: #f3f3f3;
+  padding: 12px;
+  border-radius: 8px;
+  height: 140px;
+  overflow: auto;
+  font-size: 13px;
+  text-align: left;
+}
+
+button {
+  margin-top: 12px;
+  padding: 8px 14px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  background: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #f9f9f9;
+}
+
+.peers {
+  margin-top: 10px;
+  font-size: 12px;
+  color: #555;
+}
