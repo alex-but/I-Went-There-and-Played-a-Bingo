@@ -42,3 +42,15 @@ No build, one python script to run, no parameters, hardcoded port 5566.
 4. Open http://localhost:5566 on your phone (same network) and enter your name with the **Start this game NOW!!!** button.
 
 The server stores a JSON file per player under [players/](players) and serves them verbatim so everyone can see each board. Click or tap any square to toggle its `done` status for any player.
+
+### Running tests
+
+All tests live under [tests/](tests).
+
+* Python backend logic: `python -m unittest discover tests/python`
+* Front-end helpers (Node test runner): `node --test tests/js`
+
+### Tests
+
+* Python helpers: `python -m unittest discover tests/python`
+* Frontend logic: `node --test tests/js`

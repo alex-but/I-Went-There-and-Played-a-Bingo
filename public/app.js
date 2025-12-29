@@ -9,6 +9,11 @@ const selectEl = document.getElementById('playerSelect');
 const refreshBtn = document.getElementById('refreshBoards');
 const formEl = document.getElementById('startForm');
 const nameInput = document.getElementById('playerName');
+const logic = window.BingoLogic;
+if (!logic) {
+    throw new Error('BingoLogic helpers missing');
+}
+const { averageDifficulty, buildTogglePayload } = logic;
 
 const statusClasses = {
     info: '--info',
@@ -142,12 +147,6 @@ function renderBoards() {
     });
 }
 
-function averageDifficulty(board) {
-    const values = Object.values(board);
-    const total = values.reduce((sum, cell) => sum + Number(cell.difficulty || 0), 0);
-    return Math.round(total / values.length) || 0;
-}
-
 async function handleCellToggle(event) {
     const cell = event.currentTarget;
     const slug = cell.dataset.slug;
@@ -159,8 +158,7 @@ async function handleCellToggle(event) {
 
     const currentState = boardPayload.board[cellKey];
     const nextState = !currentState.done;
-    const payload = { name: boardPayload.name };
-    payload[cellKey] = { done: nextState };
+    const payload = buildTogglePayload(boardPayload.name, cellKey, nextState);
 
     cell.disabled = true;
     try {
@@ -203,12 +201,6 @@ formEl.addEventListener('submit', async (event) => {
             throw new Error('Failed to create player');
         }
         const data = await response.json();
-        state.players = data.players || [];
-        if (data.player) {
-            state.boards.set(data.player.slug, data.player);
-        }
-        renderPlayerSelect();
-        renderBoards();
         nameInput.value = '';
         setStatus('Board ready! Tap away.');
     } catch (error) {
