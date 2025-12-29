@@ -18,6 +18,8 @@ DATA_DIR = BASE_DIR / "data"
 PLAYERS_DIR = BASE_DIR / "players"
 CHALLENGES_FILE = DATA_DIR / "challenges.csv"
 PORT = 5566
+BOARD_DIMENSION = 5
+BOARD_SIZE = BOARD_DIMENSION * BOARD_DIMENSION
 
 Challenge = Dict[str, object]
 Board = Dict[str, Dict[str, object]]
@@ -53,7 +55,7 @@ def load_challenges() -> List[Challenge]:
 
     if len(challenges) < 25:
         raise ValueError(
-            "Need at least 25 challenges to fill the bingo board. "
+            f"Need at least {BOARD_SIZE} challenges to fill the bingo board. "
             f"Found {len(challenges)} entries in {CHALLENGES_FILE}."
         )
     return challenges
@@ -67,11 +69,11 @@ def slugify(name: str) -> str:
 
 def challenge_board(challenges: List[Challenge]) -> Board:
     """Return a randomized 5x5 board for a player."""
-    picks = random.sample(challenges, 25)
+    picks = random.sample(challenges, BOARD_SIZE)
     board: Board = {}
     idx = 0
-    for row in range(5):
-        for col in range(5):
+    for row in range(BOARD_DIMENSION):
+        for col in range(BOARD_DIMENSION):
             cell_key = f"{row + 1}x{col + 1}"
             payload = picks[idx]
             board[cell_key] = {

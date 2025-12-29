@@ -2,7 +2,7 @@
 
 This is a super simple web app that allows a group of players to play challenge bingo.
 
-* The admin adds a list of csv file with 25 challenges and their difficulty from 1 to 10
+* The admin adds a csv file with at least 25 challenges (more is fine) and their difficulty from 1 to 10
 * A user enters his name in a tiny web UI home page with something like "Start this game NOW!!!". No registration whatsoever
 * A backend (python) will randomize the challenges in a json named with as `player_name.json` and that has for each challenge:
 ```json
@@ -37,7 +37,7 @@ No build, one python script to run, no parameters, hardcoded port 5566.
 ### Getting started
 
 1. Make sure you have Python 3.11+ available.
-2. Optionally edit [data/challenges.csv](data/challenges.csv) with exactly 25 rows (add more to keep things fresh).
+2. Optionally edit [data/challenges.csv](data/challenges.csv) with 25 or more rows of challenges (the server samples a random 25 for every player).
 3. Run the server: `python server.py`
 4. Open http://localhost:5566 on your phone (same network) and enter your name with the **Start this game NOW!!!** button.
 
